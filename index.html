@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Group Project App Prototype</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .navbar {
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .navbar a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .screen {
+            display: none;
+            padding: 20px;
+            text-align: center;
+        }
+
+        #home {
+            display: block;
+        }
+
+        /* Button Styling */
+        .button {
+            background-color: #007BFF;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 10px;
+        }
+
+        .button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Custom styling for specific screens */
+        #projects ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        #projects ul li {
+            margin: 10px 0;
+        }
+
+        /* Message Section */
+        .message-board {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: left;
+            border: 1px solid #ddd;
+            padding: 10px;
+            background-color: #fff;
+            margin-top: 20px;
+        }
+
+        .message {
+            background-color: #f1f1f1;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 4px;
+        }
+
+        .message input {
+            width: 80%;
+            padding: 8px;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+
+        .message button {
+            padding: 8px 12px;
+            background-color: #007BFF;
+            border: none;
+            color: white;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <div class="navbar">
+        <a href="#" data-target="home">Home</a>
+        <a href="#" data-target="projects">Projects</a>
+        <a href="#" data-target="tasks">Tasks</a>
+        <a href="#" data-target="messages">Messages</a>
+    </div>
+
+    <!-- Home Screen -->
+    <div id="home" class="screen">
+        <h1>Welcome to Group Project App</h1>
+        <p>Manage your team projects easily and collaborate with your group!</p>
+        <a href="#" data-target="projects" class="button">Go to Projects</a>
+    </div>
+
+    <!-- Projects Screen -->
+    <div id="projects" class="screen">
+        <h1>Projects Dashboard</h1>
+        <ul>
+            <li><a href="#" data-target="tasks">Project 1</a></li>
+            <li><a href="#" data-target="tasks">Project 2</a></li>
+        </ul>
+        <a href="#" data-target="home" class="button">Back to Home</a>
+    </div>
+
+    <!-- Tasks Screen -->
+    <div id="tasks" class="screen">
+        <h1>Task Management</h1>
+        <ul>
+            <li>Task 1: Write Introduction</li>
+            <li>Task 2: Design UI</li>
+        </ul>
+        <a href="#" data-target="projects" class="button">Back to Projects</a>
+    </div>
+
+    <!-- Messages Screen -->
+    <div id="messages" class="screen">
+        <h1>Messages</h1>
+        <div class="message-board">
+            <div class="message">User1: Hey, we need to finish the project outline soon!</div>
+            <div class="message">User2: I agree. Let's have a meeting tomorrow.</div>
+            <div class="message">User3: I'll work on the intro part.</div>
+
+            <!-- Input to add new messages -->
+            <input type="text" id="messageInput" placeholder="Type a message...">
+            <button onclick="addMessage()">Send</button>
+        </div>
+        <a href="#" data-target="home" class="button">Back to Home</a>
+    </div>
+
+    <script>
+        // Function to hide all screens
+        function hideAllScreens() {
+            const screens = document.querySelectorAll('.screen');
+            screens.forEach(screen => {
+                screen.style.display = 'none';
+            });
+        }
+
+        // Event listener for navigation links
+        const navLinks = document.querySelectorAll('.navbar a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                
+                // Get the target screen
+                const targetScreen = document.getElementById(e.target.getAttribute('data-target'));
+                
+                // Hide all screens and show the selected one
+                hideAllScreens();
+                targetScreen.style.display = 'block';
+            });
+        });
+
+        // Function to add a new message
+        function addMessage() {
+            const messageInput = document.getElementById('messageInput');
+            const messageBoard = document.querySelector('.message-board');
+
+            if (messageInput.value.trim() !== "") {
+                const newMessage = document.createElement('div');
+                newMessage.classList.add('message');
+                newMessage.textContent = `User4: ${messageInput.value}`;
+                messageBoard.appendChild(newMessage);
+
+                // Clear the input field after sending the message
+                messageInput.value = '';
+            } else {
+                alert("Please enter a message.");
+            }
+        }
+    </script>
+
+</body>
+</html>
+
